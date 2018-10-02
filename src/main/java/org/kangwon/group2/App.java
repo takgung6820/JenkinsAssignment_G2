@@ -9,6 +9,11 @@ import java.util.Scanner;
  */
 public class App
 {
+
+   // byeoljubu -> Exception Handling, final modify
+    private static boolean correctInput = false;    // check (user input a alphabet)
+    private static boolean clear = false;           // game clear
+
     public static void main( String[] args ) {
         // takgung6820 ->  Specifying Keyword
         String keyword;
@@ -35,8 +40,8 @@ public class App
                 continue;
             }
 
-
-            if(!guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard))
+            clear = guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard);
+            if(!clear && correctInput)
             {
                 hangman.fail();
             }
@@ -46,6 +51,8 @@ public class App
 
             printBoards(guessBoard, alphabetBoard);
         }
+        if(clear)
+            System.out.println("Game Clear!");
 
         input.close();
     }
@@ -74,18 +81,26 @@ public class App
      */
     public static boolean guessBoard(String keyword, char character, char[] guessBoard, char[] alphabetBoard) {
         boolean guess = false;
-        if(alphabetBoard[character - 65] == ' ') {  // // Duplicate input.
-            System.out.println("The character you already entered!");
-            guess = false;
-        }
-        else {  // Correct input.
-            alphabetBoard[character - 65] = ' ';
-            for(int i = 0; i < guessBoard.length; i++) {
-                if (keyword.charAt(i) == character) {
-                    guessBoard[i] = character;
-                    guess = true;
-                }
+        try{
+            if(alphabetBoard[character - 65] == ' ') {  // // Duplicate input.
+                System.out.println("The character you already entered!");
+                guess = false;
+                correctInput = false;
             }
+            else {  // Correct input.
+                alphabetBoard[character - 65] = ' ';
+                for(int i = 0; i < guessBoard.length; i++) {
+                    if (keyword.charAt(i) == character) {
+                        guessBoard[i] = character;
+                        guess = true;
+                    }
+                }
+                correctInput = true;
+            }
+        }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("Select alphabet");
+            correctInput = false;
         }
         return guess;
     }
