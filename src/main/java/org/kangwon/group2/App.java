@@ -9,6 +9,10 @@ import java.util.Scanner;
  */
 public class App
 {
+
+    private static int Life = 8;
+    private static boolean clear = true;
+
     public static void main( String[] args ) {
         // takgung6820 ->  Specifying Keyword
         String keyword;
@@ -32,7 +36,15 @@ public class App
             }
             guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard);
             printBoards(guessBoard, alphabetBoard);
+            if(Life==0){
+                clear = false;
+                break;
+            }
         }
+        if(clear)
+            System.out.println("Game Clear!");
+        else
+            System.out.println("You Die!");
 
         input.close();
     }
@@ -61,19 +73,26 @@ public class App
      */
     public static boolean guessBoard(String keyword, char character, char[] guessBoard, char[] alphabetBoard) {
         boolean guess = false;
-        if(alphabetBoard[character - 65] == ' ') {  // // Duplicate input.
-            System.out.println("The character you already entered!");
-            guess = false;
-        }
-        else {  // Correct input.
-            alphabetBoard[character - 65] = ' ';
-            for(int i = 0; i < guessBoard.length; i++) {
-                if (keyword.charAt(i) == character) {
-                    guessBoard[i] = character;
-                    guess = true;
+        try{
+            if(alphabetBoard[character - 65] == ' ') {  // // Duplicate input.
+                System.out.println("The character you already entered!");
+                guess = false;
+            }
+            else {  // Correct input.
+                alphabetBoard[character - 65] = ' ';
+                for(int i = 0; i < guessBoard.length; i++) {
+                    if (keyword.charAt(i) == character) {
+                        guessBoard[i] = character;
+                        guess = true;
+                    }
                 }
+                Life--;
             }
         }
+        catch(IndexOutOfBoundsException e){
+            System.out.println("Select alphabet");
+        }
+
         return guess;
     }
 
