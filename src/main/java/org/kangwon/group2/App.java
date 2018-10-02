@@ -1,4 +1,4 @@
-package org.kangwon.group2;
+ackage org.kangwon.group2;
 
 import java.util.Arrays;
 import java.util.Scanner;
@@ -10,11 +10,13 @@ import java.util.Scanner;
 public class App
 {
     public static void main( String[] args ) {
-        // ydhwa -> Test variables
-        String keyword = "APPLE";
+        // takgung6820 ->  Specifying Keyword
+        String keyword;
+        Words words = new Words("C:\\Users\\takgu\\IdeaProjects\\HangmanProject\\keyword.txt");
+        keyword = words.getKeyword();
         Scanner input = new Scanner(System.in);
 
-        // Board variables
+        // ydhwa -> Board variables
         char[] guessBoard = new char[keyword.length()];
         char[] alphabetBoard = new char[26];
         initBoards(keyword, guessBoard, alphabetBoard);
