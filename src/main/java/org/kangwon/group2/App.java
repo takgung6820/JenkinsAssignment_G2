@@ -16,6 +16,10 @@ public class App
         keyword = words.getKeyword();
         Scanner input = new Scanner(System.in);
 
+        // CuteIU -> Hangman Ascii art.
+        Hangman hangman = new Hangman();
+        hangman.print();
+
         // ydhwa -> Board variables
         char[] guessBoard = new char[keyword.length()];
         char[] alphabetBoard = new char[26];
@@ -23,14 +27,23 @@ public class App
         printBoards(guessBoard, alphabetBoard);
 
         // ydhwa -> Play test.
-        while(!isFinished(guessBoard)) {
+        while(!isFinished(guessBoard, hangman)) {
             System.out.print(" > ");
             String command = input.next();
             if(command.length() > 1) {
                 System.out.println("Wrong input!");
                 continue;
             }
-            guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard);
+
+
+            if(!guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard))
+            {
+                hangman.fail();
+            }
+
+            // CuteIU -> Hangman Print
+            hangman.print();
+
             printBoards(guessBoard, alphabetBoard);
         }
 
@@ -99,9 +112,13 @@ public class App
      * @return
      * @author ydhwa
      */
-    public static boolean isFinished(char[] guessBoard) {
+    public static boolean isFinished(char[] guessBoard, Hangman hangman) {
         // Life is 0
-        // Not implemented.
+        if(hangman.done())
+        {
+            System.out.println("Game Over!");
+            return true;
+        }
 
         // Check correct answer
         for(int i = 0; i < guessBoard.length; i++)
