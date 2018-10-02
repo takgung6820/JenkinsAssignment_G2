@@ -12,7 +12,7 @@ public class App
     public static void main( String[] args ) {
         // takgung6820 ->  Specifying Keyword
         String keyword;
-        Words words = new Words("C:\\Users\\takgu\\IdeaProjects\\HangmanProject\\keyword.txt");
+        Words words = new Words("keyword.txt"); // Change file path - ydhwa
         keyword = words.getKeyword();
         Scanner input = new Scanner(System.in);
 
