@@ -1,4 +1,4 @@
-ackage org.kangwon.group2;
+package org.kangwon.group2;
 
 import java.util.Arrays;
 import java.util.Scanner;
