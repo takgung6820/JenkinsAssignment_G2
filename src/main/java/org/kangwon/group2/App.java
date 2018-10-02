@@ -10,8 +10,8 @@ import java.util.Scanner;
 public class App
 {
 
-    private static int Life = 8;
-    private static boolean clear = true;
+
+    private static boolean correctInput = false;
 
     public static void main( String[] args ) {
         // takgung6820 ->  Specifying Keyword
@@ -40,7 +40,7 @@ public class App
             }
 
 
-            if(!guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard))
+            if(!guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard) && correctInput)
             {
                 hangman.fail();
             }
@@ -49,15 +49,8 @@ public class App
             hangman.print();
 
             printBoards(guessBoard, alphabetBoard);
-            if(Life==0){
-                clear = false;
-                break;
-            }
         }
-        if(clear)
-            System.out.println("Game Clear!");
-        else
-            System.out.println("You Die!");
+        System.out.println("Game Clear!");
 
         input.close();
     }
@@ -90,6 +83,7 @@ public class App
             if(alphabetBoard[character - 65] == ' ') {  // // Duplicate input.
                 System.out.println("The character you already entered!");
                 guess = false;
+                correctInput = false;
             }
             else {  // Correct input.
                 alphabetBoard[character - 65] = ' ';
@@ -99,11 +93,12 @@ public class App
                         guess = true;
                     }
                 }
-                Life--;
+                correctInput = true;
             }
         }
         catch(IndexOutOfBoundsException e){
             System.out.println("Select alphabet");
+            correctInput = false;
         }
 
         return guess;
