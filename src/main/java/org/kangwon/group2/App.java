@@ -30,6 +30,8 @@ public class App
         initBoards(keyword, guessBoard, alphabetBoard);
         printBoards(guessBoard, alphabetBoard);
 
+        boolean clear = false;
+
         // ydhwa -> Play test.
         while(!isFinished(guessBoard, hangman)) {
             System.out.print(" > ");
@@ -39,8 +41,8 @@ public class App
                 continue;
             }
 
-
-            if(!guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard) && correctInput)
+            clear = guessBoard(keyword, command.toUpperCase().charAt(0), guessBoard, alphabetBoard);
+            if(!clear && correctInput)
             {
                 hangman.fail();
             }
@@ -50,7 +52,8 @@ public class App
 
             printBoards(guessBoard, alphabetBoard);
         }
-        System.out.println("Game Clear!");
+        if(clear)
+            System.out.println("Game Clear!");
 
         input.close();
     }
@@ -100,7 +103,6 @@ public class App
             System.out.println("Select alphabet");
             correctInput = false;
         }
-
         return guess;
     }
 
