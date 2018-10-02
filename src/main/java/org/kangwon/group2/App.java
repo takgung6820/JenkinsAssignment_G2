@@ -10,8 +10,9 @@ import java.util.Scanner;
 public class App
 {
 
-
-    private static boolean correctInput = false;
+   // byeoljubu -> Exception Handling, final modify
+    private static boolean correctInput = false;    // check (user input a alphabet)
+    private static boolean clear = false;           // game clear
 
     public static void main( String[] args ) {
         // takgung6820 ->  Specifying Keyword
@@ -29,8 +30,6 @@ public class App
         char[] alphabetBoard = new char[26];
         initBoards(keyword, guessBoard, alphabetBoard);
         printBoards(guessBoard, alphabetBoard);
-
-        boolean clear = false;
 
         // ydhwa -> Play test.
         while(!isFinished(guessBoard, hangman)) {
