@@ -1,5 +1,7 @@
 # JenkinsAssignment_G2
 
+-----
+
 ## Simple Hangman game
 
 ## Developer
